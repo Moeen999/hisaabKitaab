@@ -13,7 +13,7 @@ export default function Ledger({ userId }) {
         {user.name} ka khaata👇
       </h3>
       <p className="mb-3 font-medium text-green-600 dark:text-green-400">
-        Total Pesy🤑 : <span className="text- xl">Rs {total}</span>
+        Total Pesy🤑 : <span className="text- xl">Rs {total} /-</span>
       </p>
 
       <ul className="space-y-2 mb-4">
