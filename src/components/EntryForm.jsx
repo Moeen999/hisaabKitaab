@@ -14,7 +14,12 @@ export default function EntryForm({ userId }) {
       type: "ADD_ENTRY",
       payload: {
         userId,
-        entry: { id: Date.now(), description: desc, amount: finalAmt },
+        entry: {
+          id: Date.now(),
+          description: desc,
+          amount: finalAmt,
+          timestamp: new Date().toLocaleString(),
+        },
       },
     });
     setDesc("");

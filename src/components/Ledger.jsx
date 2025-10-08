@@ -46,6 +46,7 @@ export default function Ledger({ userId, onBack }) {
               <span className={e.amount >= 0 ? "text-green-500" : "text-red-500"}>
                 Rs.{Math.abs(e.amount)}/-
               </span>
+              <small className="text-gray-500 dark:text-gray-400">{e.timestamp}</small>
             </span>
             <button
               onClick={() =>
