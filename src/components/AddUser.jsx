@@ -15,13 +15,13 @@ export default function AddUser() {
   };
 
   return (
-    <div className="flex gap-2 mb-4">
+    <div className="flex flex-col sm:flex-row gap-2 mb-4">
       <input
         type="text"
         placeholder="Nay maqrooz bndy ka naam..."
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="border rounded-lg px-3 py-2 w-full dark:bg-gray-800 dark:text-white"
+        className="border rounded-lg px-3 py-2 flex-1 dark:bg-gray-800 dark:text-white"
       />
       <button
         onClick={addUser}

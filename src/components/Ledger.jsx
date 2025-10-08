@@ -1,29 +1,51 @@
 import { useLedger } from "../context/LedgerContext";
 import EntryForm from "./EntryForm";
 
-
-export default function Ledger({ userId }) {
+export default function Ledger({ userId, onBack }) {
   const { state, dispatch } = useLedger();
   const user = state.users.find((u) => u.id === userId);
+
+  // If user deleted, safely exit
+  if (!user) {
+    onBack();
+    return null;
+  }
+
   const total = user.entries.reduce((sum, e) => sum + e.amount, 0);
 
   return (
     <div className="mt-5 bg-white dark:bg-gray-900 p-4 rounded-xl shadow">
-      <h3 className="text-lg font-semibold mb-2 dark:text-gray-100">
-        {user.name} ka khaata👇
-      </h3>
-      <p className="mb-3 font-medium text-green-600 dark:text-green-400">
-        Total Pesy🤑 : <span className="text- xl">Rs {total} /-</span>
+      <div className="flex justify-between items-center mb-2">
+        <h3 className="text-lg font-semibold dark:text-gray-100">
+          {user.name} ka khaata 👇
+        </h3>
+        <button
+          onClick={onBack}
+          className="text-sm text-blue-500 hover:underline"
+        >
+          ← Back
+        </button>
+      </div>
+
+      <p
+        className={`mb-3 font-medium ${
+          total >= 0 ? "text-green-600 dark:text-green-400" : "text-red-500"
+        }`}
+      >
+        Total Pesy🤑 : <span className="text-xl">Rs {total} /-</span>
       </p>
 
-      <ul className="space-y-2 mb-4">
+      <ul className="space-y-2 mb-4 max-h-60 overflow-y-auto">
         {user.entries.map((e) => (
           <li
             key={e.id}
             className="flex justify-between items-center bg-gray-50 dark:bg-gray-800 px-3 py-2 rounded-lg"
           >
             <span className="dark:text-gray-200">
-              {e.description} -<span style={{color:"orangered"}}> Rs.{e.amount}/-</span>
+              {e.description} —
+              <span className={e.amount >= 0 ? "text-green-500" : "text-red-500"}>
+                Rs.{Math.abs(e.amount)}/-
+              </span>
             </span>
             <button
               onClick={() =>

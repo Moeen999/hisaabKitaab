@@ -12,10 +12,7 @@ function ledgerReducer(state, action) {
       return { ...state, users: [...state.users, action.payload] };
 
     case "DELETE_USER":
-      return {
-        ...state,
-        users: state.users.filter((u) => u.id !== action.payload),
-      };
+      return { ...state, users: state.users.filter((u) => u.id !== action.payload) };
 
     case "ADD_ENTRY":
       return {
@@ -34,9 +31,7 @@ function ledgerReducer(state, action) {
           u.id === action.payload.userId
             ? {
                 ...u,
-                entries: u.entries.filter(
-                  (e) => e.id !== action.payload.entryId
-                ),
+                entries: u.entries.filter((e) => e.id !== action.payload.entryId),
               }
             : u
         ),
